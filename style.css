@@ -1,0 +1,917 @@
+/* =========================================================================
+   Variables & Theme Setup
+   ========================================================================= */
+   :root {
+    --bg-color: #0a0a0a;
+    --surface-color: #121212;
+    --surface-light: #1e1e1e;
+    --border-color: rgba(255, 255, 255, 0.1);
+    
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    
+    /* Muted Gold Accent */
+    --accent-color: #c4a45e;
+    --accent-hover: #dfbc71;
+    --accent-gradient: linear-gradient(135deg, #c4a45e 0%, #a48141 100%);
+    
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    
+    --transition-smooth: all 0.3s ease;
+}
+
+/* =========================================================================
+   Reset & Base Styles
+   ========================================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-smooth);
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.section {
+    padding: 6rem 0;
+    position: relative;
+}
+
+/* =========================================================================
+   Typography
+   ========================================================================= */
+h1, h2, h3, h4 {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.accent-text {
+    color: var(--accent-color);
+}
+
+/* =========================================================================
+   Buttons
+   ========================================================================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: var(--transition-smooth);
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: #000;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* =========================================================================
+   Navigation
+   ========================================================================= */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: var(--transition-smooth);
+}
+
+.header.scrolled {
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.05em;
+}
+
+.logo-box {
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0;
+    transition: var(--transition-smooth);
+}
+.logo-box:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.nav-cta {
+    color: var(--accent-color) !important;
+    border: 1px solid var(--accent-color);
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+}
+
+.nav-cta:hover {
+    background: var(--accent-color);
+    color: #000 !important;
+}
+
+/* =========================================================================
+   Hero Section
+   ========================================================================= */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.hero-title {
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.9;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.solid-text {
+    color: var(--text-primary);
+    font-weight: 800;
+}
+
+.stroke-text {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--text-primary);
+    font-weight: 800;
+}
+
+.hero-roles {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-color);
+    margin-bottom: 3rem;
+    border-left: 2px solid var(--accent-color);
+    padding-left: 1rem;
+}
+
+.hero-subtitle-wrapper {
+    max-width: 600px;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* =========================================================================
+   Impact / Metrics Section
+   ========================================================================= */
+.metrics {
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-color);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.metric-card {
+    padding: 2rem 0;
+}
+
+.metric-card h3 {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.metric-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* =========================================================================
+   Operating Principles Section
+   ========================================================================= */
+.philosophy {
+    background: var(--surface-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.principle-card {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.principle-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+.principle-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.principle-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.principle-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* =========================================================================
+   Timeline / Career Section
+   ========================================================================= */
+.timeline-section {
+    background: var(--bg-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border-color);
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 3rem;
+    padding-bottom: 4rem;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -4px;
+    top: 5px;
+    width: 9px;
+    height: 9px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+
+.timeline-header h3 {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+}
+
+.timeline-date {
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.timeline-desc {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tags span {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    color: var(--text-secondary);
+}
+
+/* =========================================================================
+   Testimonials Section
+   ========================================================================= */
+.testimonials {
+    background: var(--bg-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 3rem 2.5rem;
+    position: relative;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+.quote-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+.testimonial-text {
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+    flex-grow: 1;
+}
+
+.testimonial-author {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+}
+
+.author-name {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+}
+
+.author-title {
+    color: var(--accent-color);
+    font-size: 0.85rem;
+}
+
+/* =========================================================================
+   What I Bring Section
+   ========================================================================= */
+.capabilities {
+    background: var(--surface-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.cap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.capability-card {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    transition: var(--transition-smooth);
+}
+
+.capability-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+.cap-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.capability-card h3 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.capability-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* =========================================================================
+   Awards Section
+   ========================================================================= */
+.awards {
+    background: var(--surface-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.award-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.award-column {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    transition: var(--transition-smooth);
+}
+
+.award-column:hover {
+    border-color: var(--accent-color);
+}
+
+.award-column h3 {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.8rem;
+}
+
+.award-list {
+    list-style: none;
+}
+
+.award-list li {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.6;
+}
+
+.award-list li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-size: 0.8rem;
+    top: 0.2rem;
+}
+
+/* =========================================================================
+   Contact Section
+   ========================================================================= */
+.contact {
+    background: var(--bg-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.contact-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.contact-info p {
+    color: var(--text-secondary);
+    margin-top: 1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 1rem;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.contact-form button {
+    width: 100%;
+}
+
+/* =========================================================================
+   Footer
+   ========================================================================= */
+.footer {
+    border-top: 1px solid var(--border-color);
+    padding: 3rem 0;
+    background: var(--bg-color);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.footer-left p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-links a {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+/* =========================================================================
+   Animations & Responsive
+   ========================================================================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 992px) {
+    .metrics-grid,
+    .cap-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-card {
+        grid-template-columns: 1fr;
+        padding: 2.5rem;
+        gap: 2.5rem;
+    }
+    
+    .timeline-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .hero-title {
+        font-size: 4rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================================
+   AI Chatbot Widget
+   ========================================================================= */
+.chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.chatbot-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+.chatbot-toggle:hover {
+    transform: scale(1.05);
+    background-color: var(--accent-hover);
+}
+.chatbot-toggle svg {
+    width: 28px;
+    height: 28px;
+}
+.chatbot-window {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 380px;
+    height: 500px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: bottom right;
+}
+.chatbot-window.hidden {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+    pointer-events: none;
+}
+.chatbot-header {
+    background-color: var(--surface-light);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+.chatbot-header h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+.chatbot-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+.chatbot-close:hover {
+    color: var(--accent-color);
+}
+.chatbot-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.message {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.system-message, .bot-message {
+    background-color: var(--surface-light);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    color: var(--text-primary);
+}
+.user-message {
+    background-color: var(--accent-color);
+    color: #000;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+.chatbot-input-area {
+    padding: 15px;
+    background-color: var(--surface-color);
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid var(--border-color);
+}
+.chatbot-input-area input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    border-radius: 20px;
+    outline: none;
+    font-size: 0.9rem;
+    transition: var(--transition-smooth);
+}
+.chatbot-input-area input:focus {
+    border-color: var(--accent-color);
+}
+.chatbot-input-area button {
+    background-color: var(--accent-color);
+    color: #000;
+    border: none;
+    padding: 0 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: var(--transition-smooth);
+}
+.chatbot-input-area button:hover {
+    background-color: var(--accent-hover);
+}
+.loading-dots {
+    animation: blink 1.4s infinite both;
+}
+@keyframes blink {
+    0% { opacity: 0.2; }
+    20% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
