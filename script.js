@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     - He is a Vancouver-based people leader and business operations professional.
     - Strong background in customer experience (CX), sales leadership, franchise operations, and team development.
     - His leadership experience spans organizations like 1-800-GOT-JUNK?, BCAA, and Rogers.
-    - Key Achievements: Accountable for a $130M+ portfolio of revenue, led large high-performing teams (including 10 managers and 200 employees at Rogers, and 6 managers with 150+ employees at 1-800-GOT-JUNK?), successfully developed and mentored 6 direct reports into senior management roles, led growth and engagement through COVID restrictions, drove inbound sales conversion rate YoY of 8%+, and dramatically increased revenue per completed job by 46.84% since 2019.
+    - Key Achievements: Accountable for a $130M+ portfolio of revenue, led large high-performing teams (including 10 managers and 200 employees at Rogers, and 6 managers with 150+ employees at 1-800-GOT-JUNK?), successfully developed and mentored 6 direct reports into senior management roles, led growth and engagement through COVID restrictions, drove inbound sales conversion rate of +22.6%, and dramatically increased revenue per completed job by +46.8% since 2019.
     - He successfully combines operational excellence with a highly people-focused leadership style (emphasizing coaching, culture, and continuous improvement).
     - He is passionate about leveraging data, AI, and process optimization to improve business performance and support frontline teams.
     - Personal traits: Friends and colleagues describe him as thoughtful, organized, approachable, naturally building trust and positive energy within communities.
