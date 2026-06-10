@@ -191,4 +191,60 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000);
     }
 
+    /* =========================================================================
+       Animated Counters
+       ========================================================================= */
+    const counters = document.querySelectorAll('.metric-value');
+    const bars = document.querySelectorAll('.metric-bar-fill');
+    
+    const countUpObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Animate numbers
+                if (entry.target.classList.contains('metric-value')) {
+                    const el = entry.target;
+                    const target = parseFloat(el.getAttribute('data-target'));
+                    const prefix = el.getAttribute('data-prefix') || '';
+                    const suffix = el.getAttribute('data-suffix') || '';
+                    const decimals = parseInt(el.getAttribute('data-decimals') || '0');
+                    const duration = 2000;
+                    let start = null;
+                    
+                    const step = (timestamp) => {
+                        if (!start) start = timestamp;
+                        const progress = Math.min((timestamp - start) / duration, 1);
+                        
+                        // Ease out cubic
+                        const easeOut = 1 - Math.pow(1 - progress, 3);
+                        const current = (easeOut * target).toFixed(decimals);
+                        
+                        el.textContent = prefix + current + suffix;
+                        
+                        if (progress < 1) {
+                            window.requestAnimationFrame(step);
+                        } else {
+                            el.textContent = prefix + target.toFixed(decimals) + suffix;
+                        }
+                    };
+                    
+                    window.requestAnimationFrame(step);
+                    observer.unobserve(el);
+                }
+                
+                // Animate bars
+                if (entry.target.classList.contains('metric-bar-fill')) {
+                    const bar = entry.target;
+                    const targetWidth = bar.getAttribute('data-width');
+                    setTimeout(() => {
+                        bar.style.width = targetWidth + '%';
+                    }, 300); // slight delay for visual effect
+                    observer.unobserve(bar);
+                }
+            }
+        });
+    }, revealOptions);
+
+    counters.forEach(counter => countUpObserver.observe(counter));
+    bars.forEach(bar => countUpObserver.observe(bar));
+
 });
