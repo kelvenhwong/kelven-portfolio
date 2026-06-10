@@ -168,4 +168,27 @@ document.addEventListener('DOMContentLoaded', () => {
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
     }
 
+    /* =========================================================================
+       Rotating Message Logic
+       ========================================================================= */
+    const messages = [
+        "Let’s Build Better Customer Experiences",
+        "Let’s Talk Operations + AI",
+        "Interested in Leadership, CX, or Operational Strategy?",
+        "Open to Strategic Leadership Opportunities"
+    ];
+    let messageIndex = 0;
+    const rotatingMessageEl = document.getElementById('rotating-message');
+    
+    if (rotatingMessageEl) {
+        setInterval(() => {
+            rotatingMessageEl.style.opacity = 0;
+            setTimeout(() => {
+                messageIndex = (messageIndex + 1) % messages.length;
+                rotatingMessageEl.textContent = messages[messageIndex];
+                rotatingMessageEl.style.opacity = 1;
+            }, 500); // Wait for fade out to complete before changing text
+        }, 5000);
+    }
+
 });
