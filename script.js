@@ -247,4 +247,44 @@ document.addEventListener('DOMContentLoaded', () => {
     counters.forEach(counter => countUpObserver.observe(counter));
     bars.forEach(bar => countUpObserver.observe(bar));
 
+    /* =========================================================================
+       Testimonial Carousel
+       ========================================================================= */
+    const slides = document.querySelectorAll('.testimonial-card.slide');
+    const dots = document.querySelectorAll('.carousel-indicators .dot');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    let currentSlide = 0;
+
+    if (slides.length > 0) {
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let index = (currentSlide + 1) % slides.length;
+            showSlide(index);
+        }
+
+        function prevSlide() {
+            let index = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(index);
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                showSlide(index);
+            });
+        });
+    }
+
 });

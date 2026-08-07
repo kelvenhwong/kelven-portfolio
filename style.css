@@ -503,10 +503,33 @@ h1, h2, h3, h4 {
     border-top: 1px solid var(--border-color);
 }
 
-.testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+.testimonial-carousel {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-card.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+    transform: translateX(30px);
+}
+
+.testimonial-card.slide.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    transform: translateX(0);
 }
 
 .testimonial-card {
@@ -523,6 +546,53 @@ h1, h2, h3, h4 {
 .testimonial-card:hover {
     border-color: var(--accent-color);
     transform: translateY(-5px);
+}
+
+.carousel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.carousel-btn {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.carousel-btn:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+.carousel-indicators {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-color);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.dot.active, .dot:hover {
+    background: var(--accent-color);
+    transform: scale(1.2);
 }
 
 .quote-icon {
