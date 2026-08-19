@@ -287,4 +287,125 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /* =========================================================================
+       Contact Form Submission & Redundant Message Delivery
+       ========================================================================= */
+    const contactForm = document.getElementById('contact-form');
+    const contactSubmitBtn = document.getElementById('contact-submit-btn');
+    const contactStatus = document.getElementById('contact-status');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const nameEl = document.getElementById('name');
+            const emailEl = document.getElementById('email');
+            const messageEl = document.getElementById('message');
+
+            const name = nameEl ? nameEl.value.trim() : '';
+            const email = emailEl ? emailEl.value.trim() : '';
+            const message = messageEl ? messageEl.value.trim() : '';
+
+            if (!name || !email || !message) {
+                showContactStatus('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            setContactLoading(true);
+            showContactStatus('', ''); // clear status
+
+            const payload = {
+                name: name,
+                email: email,
+                message: message,
+                _subject: `New Portfolio Message from ${name}`
+            };
+
+            let sentSuccessfully = false;
+
+            // Attempt 1: Node Backend API (/api/contact)
+            try {
+                const apiRes = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (apiRes.ok) {
+                    const data = await apiRes.json();
+                    if (data.success) {
+                        sentSuccessfully = true;
+                    }
+                }
+            } catch (err) {
+                console.log('Node backend /api/contact not available, trying FormSubmit fallback...', err);
+            }
+
+            // Attempt 2: FormSubmit Service (Direct live email delivery for static site)
+            if (!sentSuccessfully) {
+                try {
+                    const fsRes = await fetch('https://formsubmit.co/ajax/kelvenhwong@gmail.com', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (fsRes.ok) {
+                        const data = await fsRes.json();
+                        if (data.success === 'true' || data.success === true) {
+                            sentSuccessfully = true;
+                        }
+                    }
+                } catch (fsErr) {
+                    console.error('FormSubmit dispatch failed:', fsErr);
+                }
+            }
+
+            setContactLoading(false);
+
+            if (sentSuccessfully) {
+                showContactStatus('Thank you! Your message has been sent directly to Kelven. We will be in touch soon.', 'success');
+                contactForm.reset();
+            } else {
+                const mailtoUrl = `mailto:kelvenhwong@gmail.com?subject=${encodeURIComponent('Portfolio Message from ' + name)}&body=${encodeURIComponent(message + '\n\nSender: ' + name + ' (' + email + ')')}`;
+                showContactStatus(
+                    `Message delivery service unavailable. <a href="${mailtoUrl}" style="color: inherit; text-decoration: underline; font-weight: 600;">Click here to email Kelven directly</a> at kelvenhwong@gmail.com.`,
+                    'error'
+                );
+            }
+        });
+    }
+
+    function setContactLoading(isLoading) {
+        if (!contactSubmitBtn) return;
+        const btnText = contactSubmitBtn.querySelector('.btn-text');
+        const btnSpinner = contactSubmitBtn.querySelector('.btn-spinner');
+        
+        if (isLoading) {
+            contactSubmitBtn.disabled = true;
+            if (btnText) btnText.textContent = 'Sending...';
+            if (btnSpinner) btnSpinner.classList.remove('hidden');
+        } else {
+            contactSubmitBtn.disabled = false;
+            if (btnText) btnText.textContent = 'Send Message';
+            if (btnSpinner) btnSpinner.classList.add('hidden');
+        }
+    }
+
+    function showContactStatus(msg, type) {
+        if (!contactStatus) return;
+        if (!msg) {
+            contactStatus.classList.add('hidden');
+            contactStatus.className = 'contact-status hidden';
+            contactStatus.innerHTML = '';
+            return;
+        }
+        contactStatus.className = `contact-status ${type}`;
+        contactStatus.innerHTML = msg;
+        contactStatus.classList.remove('hidden');
+    }
+
 });

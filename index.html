@@ -426,22 +426,26 @@
                         <p id="rotating-message" class="rotating-text">Let’s Build Better Customer Experiences</p>
                     </div>
                     
-                    <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent!');">
+                    <form id="contact-form" class="contact-form" action="https://formsubmit.co/kelvenhwong@gmail.com" method="POST">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" required>
+                                <input type="text" id="name" name="name" required placeholder="Your Name">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" required>
+                                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" rows="3" required></textarea>
+                            <textarea id="message" name="message" rows="3" required placeholder="How can Kelven help you?"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" id="contact-submit-btn" class="btn btn-primary">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-spinner hidden"></span>
+                        </button>
+                        <div id="contact-status" class="contact-status hidden"></div>
                     </form>
                 </div>
             </div>
