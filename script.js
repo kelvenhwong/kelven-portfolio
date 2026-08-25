@@ -1,6 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* =========================================================================
+       Google Analytics Custom Event Tracking Helper
+       ========================================================================= */
+    function trackAnalyticsEvent(eventName, eventParams = {}) {
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', eventName, eventParams);
+            console.log(`[GA4 Event] ${eventName}:`, eventParams);
+        }
+    }
+
+    /* =========================================================================
        Header Styling on Scroll
        ========================================================================= */
     const header = document.querySelector('.header');
@@ -24,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
+
+            trackAnalyticsEvent('navigation_click', { target_section: targetId });
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
@@ -89,11 +101,14 @@ document.addEventListener('DOMContentLoaded', () => {
     - Outside of work: Deeply interested in health and longevity. He's focused on improving his body composition through consistent fitness, strength training, and intermittent fasting.
     - He is also actively trying to be a better tennis player.
     - He is an avid traveler with a strong interest in Japan, food culture, and discovering authentic local experiences (like ramen spots or hidden travel gems).
-    
-    Never hallucinate information about Kelven outside of what is provided here. Keep responses relatively concise as they will be displayed in a small widget.`;
+    - Never hallucinate information about Kelven outside of what is provided here. Keep responses relatively concise as they will be displayed in a small widget.`;
 
     chatbotToggle.addEventListener('click', () => {
+        const isOpening = chatbotWindow.classList.contains('hidden');
         chatbotWindow.classList.toggle('hidden');
+        if (isOpening) {
+            trackAnalyticsEvent('chat_opened');
+        }
     });
 
     chatbotClose.addEventListener('click', () => {
@@ -110,6 +125,10 @@ document.addEventListener('DOMContentLoaded', () => {
     async function sendMessage() {
         const text = chatbotInput.value.trim();
         if (!text) return;
+
+        trackAnalyticsEvent('chat_message_sent', {
+            message_length: text.length
+        });
 
         addMessage('user', text);
         chatbotInput.value = '';
@@ -320,6 +339,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             setContactLoading(true);
             showContactStatus('', ''); // clear status
+
+            trackAnalyticsEvent('contact_form_submitted');
 
             const payload = {
                 name: name,
