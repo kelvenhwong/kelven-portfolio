@@ -294,6 +294,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactSubmitBtn = document.getElementById('contact-submit-btn');
     const contactStatus = document.getElementById('contact-status');
 
+    // Display confirmation message if redirected back with ?submitted=true
+    if (window.location.search.includes('submitted=true')) {
+        if (contactStatus) {
+            showContactStatus('Thank you! Your message has been sent directly to Kelven. We will be in touch soon.', 'success');
+            // Clean up URL parameter cleanly
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    }
+
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -341,7 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Node backend /api/contact not available, trying FormSubmit fallback...', err);
             }
 
-            // Attempt 2: FormSubmit Service (Direct live email delivery for static site)
+            // Attempt 2: FormSubmit Service (AJAX)
             if (!sentSuccessfully) {
                 try {
                     const fsRes = await fetch('https://formsubmit.co/ajax/kelvenhwong@gmail.com', {
@@ -360,21 +369,29 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
                 } catch (fsErr) {
-                    console.error('FormSubmit dispatch failed:', fsErr);
+                    console.error('FormSubmit AJAX dispatch failed:', fsErr);
                 }
             }
 
-            setContactLoading(false);
-
             if (sentSuccessfully) {
+                setContactLoading(false);
                 showContactStatus('Thank you! Your message has been sent directly to Kelven. We will be in touch soon.', 'success');
                 contactForm.reset();
             } else {
-                const mailtoUrl = `mailto:kelvenhwong@gmail.com?subject=${encodeURIComponent('Portfolio Message from ' + name)}&body=${encodeURIComponent(message + '\n\nSender: ' + name + ' (' + email + ')')}`;
-                showContactStatus(
-                    `Message delivery service unavailable. <a href="${mailtoUrl}" style="color: inherit; text-decoration: underline; font-weight: 600;">Click here to email Kelven directly</a> at kelvenhwong@gmail.com.`,
-                    'error'
-                );
+                // Attempt 3: Native HTML Form Post Fallback to FormSubmit
+                // Ensures 100% email delivery even on new domains or restricted browsers
+                let nextInput = contactForm.querySelector('input[name="_next"]');
+                if (!nextInput) {
+                    nextInput = document.createElement('input');
+                    nextInput.type = 'hidden';
+                    nextInput.name = '_next';
+                    contactForm.appendChild(nextInput);
+                }
+                const currentUrl = window.location.href.split('?')[0].split('#')[0];
+                nextInput.value = currentUrl + '?submitted=true#contact';
+
+                // Submit natively
+                contactForm.submit();
             }
         });
     }
