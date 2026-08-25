@@ -298,15 +298,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.search.includes('submitted=true')) {
         if (contactStatus) {
             showContactStatus('Thank you! Your message has been sent directly to Kelven. We will be in touch soon.', 'success');
-            // Clean up URL parameter cleanly
             window.history.replaceState({}, document.title, window.location.pathname);
         }
     }
 
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
             const nameEl = document.getElementById('name');
             const emailEl = document.getElementById('email');
             const messageEl = document.getElementById('message');
@@ -316,6 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const message = messageEl ? messageEl.value.trim() : '';
 
             if (!name || !email || !message) {
+                e.preventDefault();
                 showContactStatus('Please fill in all required fields.', 'error');
                 return;
             }
@@ -330,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 _subject: `New Portfolio Message from ${name}`
             };
 
-            let sentSuccessfully = false;
+            let sentViaAjax = false;
 
             // Attempt 1: Node Backend API (/api/contact)
             try {
@@ -343,15 +341,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (apiRes.ok) {
                     const data = await apiRes.json();
                     if (data.success) {
-                        sentSuccessfully = true;
+                        sentViaAjax = true;
                     }
                 }
             } catch (err) {
-                console.log('Node backend /api/contact not available, trying FormSubmit fallback...', err);
+                console.log('Node backend /api/contact not available, using FormSubmit service...');
             }
 
             // Attempt 2: FormSubmit Service (AJAX)
-            if (!sentSuccessfully) {
+            if (!sentViaAjax) {
                 try {
                     const fsRes = await fetch('https://formsubmit.co/ajax/kelvenhwong@gmail.com', {
                         method: 'POST',
@@ -365,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (fsRes.ok) {
                         const data = await fsRes.json();
                         if (data.success === 'true' || data.success === true) {
-                            sentSuccessfully = true;
+                            sentViaAjax = true;
                         }
                     }
                 } catch (fsErr) {
@@ -373,13 +371,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            if (sentSuccessfully) {
+            if (sentViaAjax) {
+                e.preventDefault();
                 setContactLoading(false);
                 showContactStatus('Thank you! Your message has been sent directly to Kelven. We will be in touch soon.', 'success');
                 contactForm.reset();
             } else {
-                // Attempt 3: Native HTML Form Post Fallback to FormSubmit
-                // Ensures 100% email delivery even on new domains or restricted browsers
+                // If AJAX was not confirmed, reset the spinner state FIRST so button never gets stuck
+                setContactLoading(false);
+
+                // Configure _next redirect parameter dynamically
                 let nextInput = contactForm.querySelector('input[name="_next"]');
                 if (!nextInput) {
                     nextInput = document.createElement('input');
@@ -390,8 +391,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const currentUrl = window.location.href.split('?')[0].split('#')[0];
                 nextInput.value = currentUrl + '?submitted=true#contact';
 
-                // Submit natively
-                contactForm.submit();
+                // Prevent JS from blocking default form submission
+                // FormSubmit will process natively and show activation page if live domain requires 1-click activation
             }
         });
     }
