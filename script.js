@@ -87,21 +87,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let chatHistory = [];
 
-    const systemPrompt = `You are a friendly, professional AI assistant embedded on Kelven Wong's personal portfolio website.
-    Your main goal is to enthusiastically engage visitors, answer questions about Kelven, and politely suggest they book a meeting with him by emailing kelvenhwong@gmail.com.
-    
-    Here is what you know about Kelven Wong:
-    - He is a Vancouver-based people leader and business operations professional.
-    - Strong background in customer experience (CX), sales leadership, franchise operations, and team development.
-    - His leadership experience spans organizations like 1-800-GOT-JUNK?, BCAA, and Rogers.
-    - Key Achievements: Accountable for a $130M+ portfolio of revenue, led large high-performing teams (including 10 managers and 200 employees at Rogers, and 6 managers with 150+ employees at 1-800-GOT-JUNK?), successfully developed and mentored 6 direct reports into senior management roles, led growth and engagement through COVID restrictions, drove inbound sales conversion rate of +22.6%, and dramatically increased revenue per completed job by +46.8% since 2019.
-    - He successfully combines operational excellence with a highly people-focused leadership style (emphasizing coaching, culture, and continuous improvement).
-    - He is passionate about leveraging data, AI, and process optimization to improve business performance and support frontline teams.
-    - Personal traits: Friends and colleagues describe him as thoughtful, organized, approachable, naturally building trust and positive energy within communities.
-    - Outside of work: Deeply interested in health and longevity. He's focused on improving his body composition through consistent fitness, strength training, and intermittent fasting.
-    - He is also actively trying to be a better tennis player.
-    - He is an avid traveler with a strong interest in Japan, food culture, and discovering authentic local experiences (like ramen spots or hidden travel gems).
-    - Never hallucinate information about Kelven outside of what is provided here. Keep responses relatively concise as they will be displayed in a small widget.`;
+    const systemPrompt = `You are a friendly, professional AI assistant embedded on Kelven Wong's personal executive portfolio website.
+    Your goal is to engage executive recruiters, hiring managers, and business leaders by sharing insights into Kelven's leadership philosophy, operational scale, career evolution, and work with AI-enabled transformation. Always invite visitors to connect with Kelven at kelvenhwong@gmail.com or on LinkedIn.
+
+    Core Positioning & Persona:
+    - Kelven is an experienced Operations & Customer Experience Leader who combines people leadership, business performance, and AI-enabled transformation.
+    - He is a senior operator who understands how to use AI, data, and modern platforms to solve practical business problems.
+    - He is NOT positioned as a software engineer, data scientist, or developer.
+
+    Key Achievements & Facts (Source of Truth):
+    - Scale & Performance: Managed a $130M+ revenue portfolio, led teams of 200+ employees across up to 10 managers, grew commercial portfolio to $30M, drove +115%+ revenue growth, +22.6% inbound sales conversion, +46.8% revenue per job, and 82%+ employee engagement. Supported 5,000+ contact center employees over his career.
+    - People Development: Mentored, developed, and promoted 12+ leaders into senior management roles.
+    - Operational Innovation & AI in Action: Architected an automated AI-enabled call scoring workflow using Dialpad, Gemini AI, DynamoDB, and React to turn customer calls into structured performance insights.
+    - Executive Philosophy: "AI doesn't replace the operator's judgment. It changes how quickly an operator can move from an idea to a working solution."
+    - Career Evolution: Progressive leadership across Rogers Communications (national scale & retention), BCAA (contact center & digital CX), and 1-800-GOT-JUNK? / O2E Brands (Director of Local Commercial Sales & Sales Centre).
+    - What Leaders Say: Celebrated by former superiors, direct reports, and executive peers as a thoughtful, authentic, high-integrity leader, phenomenal mentor, and true culture carrier.
+
+    Strict Rules:
+    - Never mention personal interests such as tennis, Japan travel, or longevity/health optimization.
+    - Keep answers professional, concise, structured, and focused on operational innovation, leadership, and CX.`;
 
     chatbotToggle.addEventListener('click', () => {
         const isOpening = chatbotWindow.classList.contains('hidden');
@@ -120,6 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') {
             sendMessage();
         }
+    });
+
+    // Handle prompt chips
+    const promptChips = document.querySelectorAll('.prompt-chip');
+    promptChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const promptText = chip.getAttribute('data-prompt');
+            if (promptText && chatbotInput) {
+                chatbotInput.value = promptText;
+                sendMessage();
+            }
+        });
     });
 
     async function sendMessage() {
@@ -188,29 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================================================================
-       Rotating Message Logic
-       ========================================================================= */
-    const messages = [
-        "Let’s Build Better Customer Experiences",
-        "Let’s Talk Operations + AI",
-        "Interested in Leadership, CX, or Operational Strategy?",
-        "Open to Strategic Leadership Opportunities"
-    ];
-    let messageIndex = 0;
-    const rotatingMessageEl = document.getElementById('rotating-message');
-    
-    if (rotatingMessageEl) {
-        setInterval(() => {
-            rotatingMessageEl.style.opacity = 0;
-            setTimeout(() => {
-                messageIndex = (messageIndex + 1) % messages.length;
-                rotatingMessageEl.textContent = messages[messageIndex];
-                rotatingMessageEl.style.opacity = 1;
-            }, 500); // Wait for fade out to complete before changing text
-        }, 5000);
-    }
-
-    /* =========================================================================
        Animated Counters
        ========================================================================= */
     const counters = document.querySelectorAll('.metric-value');
@@ -226,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const prefix = el.getAttribute('data-prefix') || '';
                     const suffix = el.getAttribute('data-suffix') || '';
                     const decimals = parseInt(el.getAttribute('data-decimals') || '0');
+                    const format = el.getAttribute('data-format') || '';
                     const duration = 2000;
                     let start = null;
                     
@@ -235,14 +229,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         // Ease out cubic
                         const easeOut = 1 - Math.pow(1 - progress, 3);
-                        const current = (easeOut * target).toFixed(decimals);
+                        let valStr = '';
+                        if (format === 'comma') {
+                            const rawNum = Math.floor(easeOut * target);
+                            valStr = rawNum.toLocaleString('en-US');
+                        } else {
+                            valStr = (easeOut * target).toFixed(decimals);
+                        }
                         
-                        el.textContent = prefix + current + suffix;
+                        el.textContent = prefix + valStr + suffix;
                         
                         if (progress < 1) {
                             window.requestAnimationFrame(step);
                         } else {
-                            el.textContent = prefix + target.toFixed(decimals) + suffix;
+                            const finalVal = format === 'comma' ? Math.floor(target).toLocaleString('en-US') : target.toFixed(decimals);
+                            el.textContent = prefix + finalVal + suffix;
                         }
                     };
                     

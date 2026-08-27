@@ -1171,3 +1171,396 @@ h1, h2, h3, h4 {
     20% { opacity: 1; }
     100% { opacity: 0.2; }
 }
+
+/* =========================================================================
+   Executive Portfolio Enhancements & AI Case Study
+   ========================================================================= */
+
+/* Hero Tags & Subtitle */
+.hero-positioning-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.hero-positioning-tags .tag {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--accent-color);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+}
+
+.hero-subtitle-desc {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* AI in Action Section */
+.ai-action {
+    background: var(--surface-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.section-intro {
+    max-width: 820px;
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.case-study-card {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 3rem;
+    margin-top: 2.5rem;
+}
+
+.case-study-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--accent-color);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.85rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.case-study-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+}
+
+.case-study-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+}
+
+/* Workflow Diagram */
+.workflow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+}
+
+.workflow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    min-width: 130px;
+}
+
+.step-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.85rem;
+    color: var(--text-primary);
+    transition: var(--transition-smooth);
+}
+
+.step-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.step-icon.accent {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.workflow-step:hover .step-icon {
+    border-color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.step-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+}
+
+.step-sub {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+.workflow-arrow {
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.workflow-arrow svg {
+    width: 24px;
+    height: 24px;
+}
+
+.case-study-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.callout-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--accent-color);
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 2.5rem;
+}
+
+.callout-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--accent-color);
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+}
+
+.callout-text {
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.tech-stack-wrapper {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.tech-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+}
+
+.tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.tech-pill {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+}
+
+.tech-pill:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* Timeline Subheading */
+.timeline-subheading {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--accent-color);
+    margin-bottom: 0.75rem;
+}
+
+/* Value Capabilities List */
+.cap-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.cap-header h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
+.pillar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.pillar-list li {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    padding-left: 1.25rem;
+    position: relative;
+}
+
+.pillar-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Curious Section */
+.curious-section {
+    background: var(--bg-color);
+    border-top: 1px solid var(--border-color);
+    padding: 4rem 0;
+}
+
+.curious-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 3rem;
+}
+
+.curious-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.curious-desc {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.curious-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.curious-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.curious-bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    flex-shrink: 0;
+}
+
+/* Connect Action Buttons & Subtext */
+.contact-subtext {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.connect-action-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Chatbot Suggested Prompt Chips */
+.chatbot-suggested-prompts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 0 4px;
+}
+
+.prompt-chip {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    padding: 5px 10px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.prompt-chip:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 768px) {
+    .workflow-diagram {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .workflow-arrow {
+        transform: rotate(90deg);
+        justify-content: center;
+        margin: 0.5rem 0;
+    }
+    .case-study-card {
+        padding: 1.75rem;
+    }
+}
