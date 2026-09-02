@@ -98,13 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
     Key Achievements & Facts (Source of Truth):
     - Scale & Performance: Managed a $130M+ revenue portfolio, led teams of 200+ employees across up to 10 managers, grew commercial portfolio to $30M, drove +115%+ revenue growth, +22.6% inbound sales conversion, +46.8% revenue per job, and 82%+ employee engagement. Supported 5,000+ contact center employees over his career.
     - People Development: Mentored, developed, and promoted 12+ leaders into senior management roles.
-    - Operational Innovation & AI in Action: Architected an automated AI-enabled call scoring workflow using Dialpad, Gemini AI, DynamoDB, and React to turn customer calls into structured performance insights.
-    - Executive Philosophy: "AI doesn't replace the operator's judgment. It changes how quickly an operator can move from an idea to a working solution."
+    - Operational Innovation & AI in Action (Two Case Studies):
+      1. AI-ENABLED LEAD ROUTING (Workflow Automation): Identified a manual 6-step lead routing process, mapped the automated workflow, used Claude for AI-assisted development, programmed business logic in Google Apps Script with Gmail integration, deployed into live environment, tested end-to-end, and validated in production. Business impact: Reduced manual intervention while improving speed, consistency, and scalability across the lead-routing process.
+      2. AI-ENABLED CALL SCORING & OPERATIONAL INSIGHTS (Operational Analytics): Architected an automated call-scoring workflow using Dialpad, Gemini AI, DynamoDB, and React to turn customer calls into structured performance insights.
+      3. Progression Philosophy: "Automate the work → Analyze the work → Improve the business."
+    - Executive Philosophy: "AI doesn't replace the operator's judgment. It changes how quickly an operator can move from an idea to a working solution." and "AI doesn't have to replace the operator. It can give the operator the leverage to turn a good idea into a working solution much faster."
     - Career Evolution: Progressive leadership across Rogers Communications (national scale & retention), BCAA (contact center & digital CX), and 1-800-GOT-JUNK? / O2E Brands (Director of Local Commercial Sales & Sales Centre).
     - What Leaders Say: Celebrated by former superiors, direct reports, and executive peers as a thoughtful, authentic, high-integrity leader, phenomenal mentor, and true culture carrier.
 
     Strict Rules:
     - Never mention personal interests such as tennis, Japan travel, or longevity/health optimization.
+    - Do not invent metrics, percentage improvements, or dollar savings for the Lead Routing project.
     - Keep answers professional, concise, structured, and focused on operational innovation, leadership, and CX.`;
 
     chatbotToggle.addEventListener('click', () => {
