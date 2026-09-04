@@ -77,7 +77,7 @@
         <section id="metrics" class="metrics section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-label reveal">ESTABLISHING SCALE & CREDIBILITY</span>
+                    <span class="section-label reveal">ESTABLISHING SCALE</span>
                     <h2 class="section-title reveal reveal-delay-1">THE SCALE I'VE LED</h2>
                 </div>
                 <div class="metrics-grid">
@@ -174,9 +174,10 @@
                         </p>
                     </div>
 
-                    <!-- Primary Visual Workflow Diagram -->
-                    <div class="workflow-diagram">
-                        <div class="workflow-step">
+                    <!-- Primary Visual Workflow Diagram (Single Horizontal Line, Auto-Animated) -->
+                    <div id="lead-routing-workflow" class="workflow-diagram animated-lead-workflow">
+                        <!-- Step 1: Customer -->
+                        <div class="workflow-step" data-step="0">
                             <div class="step-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                             </div>
@@ -184,11 +185,13 @@
                             <div class="step-sub">Website Lead Submission</div>
                         </div>
 
-                        <div class="workflow-arrow">
+                        <div class="workflow-arrow" data-connector="0">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            <div class="lead-pulse"></div>
                         </div>
 
-                        <div class="workflow-step">
+                        <!-- Step 2: Gmail -->
+                        <div class="workflow-step" data-step="1">
                             <div class="step-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                             </div>
@@ -196,11 +199,13 @@
                             <div class="step-sub">Incoming Lead</div>
                         </div>
 
-                        <div class="workflow-arrow">
+                        <div class="workflow-arrow" data-connector="1">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            <div class="lead-pulse"></div>
                         </div>
 
-                        <div class="workflow-step">
+                        <!-- Step 3: Google Apps Script -->
+                        <div class="workflow-step" data-step="2">
                             <div class="step-icon accent">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                             </div>
@@ -208,11 +213,13 @@
                             <div class="step-sub">Process & Validate</div>
                         </div>
 
-                        <div class="workflow-arrow">
+                        <div class="workflow-arrow" data-connector="2">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            <div class="lead-pulse"></div>
                         </div>
 
-                        <div class="workflow-step">
+                        <!-- Step 4: Territory Check -->
+                        <div class="workflow-step" data-step="3">
                             <div class="step-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                             </div>
@@ -220,11 +227,13 @@
                             <div class="step-sub">Is Territory Serviced?</div>
                         </div>
 
-                        <div class="workflow-arrow">
+                        <div class="workflow-arrow" data-connector="3">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            <div class="lead-pulse"></div>
                         </div>
 
-                        <div class="workflow-step">
+                        <!-- Step 5: Rep Assignment -->
+                        <div class="workflow-step" data-step="4">
                             <div class="step-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             </div>
@@ -232,11 +241,13 @@
                             <div class="step-sub">Is Sales Rep Assigned?</div>
                         </div>
 
-                        <div class="workflow-arrow">
+                        <div class="workflow-arrow" data-connector="4">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            <div class="lead-pulse"></div>
                         </div>
 
-                        <div class="workflow-step">
+                        <!-- Step 6: Automated Routing -->
+                        <div class="workflow-step" data-step="5">
                             <div class="step-icon accent">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                             </div>
@@ -244,16 +255,18 @@
                             <div class="step-sub">Send Lead Notification</div>
                         </div>
 
-                        <div class="workflow-arrow">
+                        <div class="workflow-arrow" data-connector="5">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            <div class="lead-pulse"></div>
                         </div>
 
-                        <div class="workflow-step">
+                        <!-- Step 7: Reporting -->
+                        <div class="workflow-step" data-step="6">
                             <div class="step-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                             </div>
-                            <div class="step-title">TRACKING</div>
-                            <div class="step-sub">Update Process</div>
+                            <div class="step-title">REPORTING</div>
+                            <div class="step-sub">Track Records</div>
                         </div>
                     </div>
 
@@ -458,21 +471,26 @@
                     </div>
                     <div class="principle-card reveal delay-1">
                         <span class="principle-number">02</span>
-                        <h4>IMPROVE THE BUSINESS</h4>
-                        <p>I connect customer experience, operational performance and financial outcomes. The best operating decisions balance what is good for the customer, the employee and the business.</p>
+                        <h4>CREATE CLARITY</h4>
+                        <p>Great leaders make complexity easier to navigate. I focus on creating clarity around priorities, expectations, decisions and accountability so teams know where we're going, why it matters and what success looks like.</p>
                     </div>
                     <div class="principle-card reveal delay-2">
                         <span class="principle-number">03</span>
-                        <h4>EXPERIMENT WITH PURPOSE</h4>
-                        <p>I use a "Think Big, Start Small, Learn Fast" approach to innovation. Rather than waiting for a perfect solution, I prefer to test ideas quickly, learn from the results and scale what works.</p>
+                        <h4>IMPROVE THE BUSINESS</h4>
+                        <p>I connect customer experience, operational performance and financial outcomes. The best operating decisions balance what is good for the customer, the employee and the business.</p>
                     </div>
                     <div class="principle-card reveal">
                         <span class="principle-number">04</span>
-                        <h4>USE TECHNOLOGY PRACTICALLY</h4>
-                        <p>Technology should solve a business problem—not exist for its own sake. I’m particularly interested in how AI, automation, data and modern platforms can remove friction, improve decision-making and give teams more leverage.</p>
+                        <h4>EXPERIMENT WITH PURPOSE</h4>
+                        <p>I use a "Think Big, Start Small, Learn Fast" approach to innovation. Rather than waiting for a perfect solution, I prefer to test ideas quickly, learn from the results and scale what works.</p>
                     </div>
                     <div class="principle-card reveal delay-1">
                         <span class="principle-number">05</span>
+                        <h4>USE TECHNOLOGY PRACTICALLY</h4>
+                        <p>Technology should solve a business problem—not exist for its own sake. I’m particularly interested in how AI, automation, data and modern platforms can remove friction, improve decision-making and give teams more leverage.</p>
+                    </div>
+                    <div class="principle-card reveal delay-2">
+                        <span class="principle-number">06</span>
                         <h4>LEAD THROUGH CHANGE</h4>
                         <p>Transformation is ultimately a people challenge. Whether implementing new technology, changing operating models or entering new markets, I focus on bringing people along while maintaining performance.</p>
                     </div>

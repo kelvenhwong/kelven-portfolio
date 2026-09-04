@@ -1250,18 +1250,19 @@ h1, h2, h3, h4 {
     margin-bottom: 2.5rem;
 }
 
-/* Workflow Diagram */
+/* Visual Workflow Diagram (Animated Single Horizontal Line) */
 .workflow-diagram {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.5rem;
     background: var(--surface-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.25rem;
     margin-bottom: 2.5rem;
     overflow-x: auto;
+    position: relative;
 }
 
 .workflow-step {
@@ -1270,7 +1271,10 @@ h1, h2, h3, h4 {
     align-items: center;
     text-align: center;
     flex: 1;
-    min-width: 130px;
+    min-width: 115px;
+    padding: 0.5rem 0.25rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .step-icon {
@@ -1300,33 +1304,112 @@ h1, h2, h3, h4 {
 
 .workflow-step:hover .step-icon {
     border-color: var(--accent-color);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
 .step-title {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 0.05em;
     color: var(--text-primary);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .step-sub {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--text-secondary);
     margin-top: 0.25rem;
+    transition: color 0.3s ease;
 }
 
+/* Active Step State */
+.workflow-step.active .step-icon {
+    border-color: var(--accent-color);
+    background: rgba(59, 130, 246, 0.2);
+    color: #ffffff;
+    box-shadow: 0 0 16px rgba(59, 130, 246, 0.45);
+    transform: translateY(-2px);
+}
+
+.workflow-step.active .step-title {
+    color: var(--accent-color);
+    text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+.workflow-step.active .step-sub {
+    color: var(--text-primary);
+}
+
+/* Active Connector & Lead Pulse Animation */
 .workflow-arrow {
     color: var(--text-secondary);
     display: flex;
     align-items: center;
-    opacity: 0.6;
+    justify-content: center;
+    opacity: 0.4;
     flex-shrink: 0;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    transition: color 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
 }
 
 .workflow-arrow svg {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
+}
+
+.workflow-arrow.active-transition {
+    color: var(--accent-color);
+    opacity: 1;
+    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.6));
+}
+
+.lead-pulse {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 8px var(--accent-color), 0 0 12px #ffffff;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.workflow-arrow.active-transition .lead-pulse {
+    animation: travelLeadPulse 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes travelLeadPulse {
+    0% {
+        left: -10%;
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 1;
+    }
+    100% {
+        left: 105%;
+        opacity: 0;
+    }
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .workflow-arrow.active-transition .lead-pulse {
+        animation: none;
+        opacity: 0;
+    }
+    .workflow-step.active .step-icon {
+        box-shadow: none;
+        transform: none;
+    }
 }
 
 .case-study-details {
@@ -1821,5 +1904,88 @@ h1, h2, h3, h4 {
     }
     .progression-arrow {
         transform: rotate(90deg);
+    }
+}
+
+/* Multi-Row Workflow Diagram */
+.workflow-multirow-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.workflow-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.workflow-row .workflow-step {
+    flex: 1;
+    min-width: 0;
+}
+
+.workflow-row-connector {
+    display: flex;
+    padding: 0.25rem 2rem;
+}
+
+.workflow-row-connector.right-align {
+    justify-content: flex-end;
+    padding-right: 12%;
+}
+
+.workflow-row-connector.left-align {
+    justify-content: flex-start;
+    padding-left: 12%;
+}
+
+.connector-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+    width: 24px;
+    height: 24px;
+}
+
+.connector-arrow svg {
+    width: 20px;
+    height: 20px;
+}
+
+.single-item-row {
+    justify-content: center;
+}
+
+.single-item-row .workflow-step {
+    max-width: 320px;
+}
+
+@media (max-width: 768px) {
+    .workflow-multirow-container {
+        padding: 1rem;
+    }
+    .workflow-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .workflow-row.reverse-row {
+        flex-direction: column;
+    }
+    .workflow-row .workflow-arrow {
+        transform: rotate(90deg);
+        justify-content: center;
+        margin: 0.25rem 0;
+    }
+    .workflow-row-connector {
+        justify-content: center !important;
+        padding: 0.25rem 0 !important;
     }
 }

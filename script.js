@@ -452,4 +452,75 @@ document.addEventListener('DOMContentLoaded', () => {
         contactStatus.classList.remove('hidden');
     }
 
+    /* =========================================================================
+       AI-Enabled Lead Routing Automatic Workflow Loop
+       ========================================================================= */
+    function initLeadRoutingAnimation() {
+        const workflowContainer = document.getElementById('lead-routing-workflow');
+        if (!workflowContainer) return;
+
+        const steps = workflowContainer.querySelectorAll('.workflow-step');
+        const connectors = workflowContainer.querySelectorAll('.workflow-arrow');
+        
+        if (steps.length === 0) return;
+
+        let currentStepIndex = 0;
+        let isPaused = false;
+
+        // Respect prefers-reduced-motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+            return;
+        }
+
+        function activateStep(index) {
+            // Remove active state from all steps & connectors
+            steps.forEach(step => step.classList.remove('active'));
+            connectors.forEach(conn => conn.classList.remove('active-transition'));
+
+            // Activate current step
+            if (steps[index]) {
+                steps[index].classList.add('active');
+            }
+
+            // Activate connector originating from current step
+            if (connectors[index]) {
+                // Restart CSS animation for lead-pulse by removing and re-adding class
+                connectors[index].classList.remove('active-transition');
+                void connectors[index].offsetWidth; // trigger reflow
+                connectors[index].classList.add('active-transition');
+            }
+        }
+
+        function advanceWorkflow() {
+            if (isPaused) return;
+
+            activateStep(currentStepIndex);
+
+            // Increment and wrap around 7 steps
+            currentStepIndex = (currentStepIndex + 1) % steps.length;
+        }
+
+        // Start initial step
+        advanceWorkflow();
+
+        // Loop every 1.8s (approx 12.6s per full cycle)
+        setInterval(advanceWorkflow, 1800);
+
+        // Pause on hover
+        workflowContainer.addEventListener('mouseenter', () => {
+            isPaused = true;
+        });
+
+        workflowContainer.addEventListener('mouseleave', () => {
+            isPaused = false;
+        });
+
+        // Pause on tab hide
+        document.addEventListener('visibilitychange', () => {
+            isPaused = document.hidden;
+        });
+    }
+
+    initLeadRoutingAnimation();
 });
