@@ -251,19 +251,22 @@ h1, h2, h3, h4 {
 }
 
 .hero-subtitle-wrapper {
-    max-width: 600px;
+    max-width: 620px;
 }
 
-.hero-subtitle {
-    font-size: 1.2rem;
+.hero-subtitle,
+.hero-subtitle-desc {
+    font-size: 1.15rem;
+    line-height: 1.6;
     color: var(--text-secondary);
-    margin-bottom: 2rem;
     font-weight: 300;
+    margin-bottom: 1.25rem;
 }
 
 .hero-actions {
     display: flex;
     gap: 1rem;
+    margin-top: 2rem;
 }
 
 /* =========================================================================
